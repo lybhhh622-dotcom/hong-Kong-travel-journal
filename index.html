@@ -21,7 +21,7 @@ h1{font-weight:400;font-size:clamp(26px,4vw,43px);letter-spacing:.07em;margin:3p
 .top-note{font-size:12px;color:var(--muted);text-align:right;line-height:1.7}
 .layout{max-width:1600px;margin:auto;padding:22px clamp(12px,2.5vw,36px) 35px;display:grid;grid-template-columns:minmax(0,1fr) 235px;gap:22px}
 .map-shell{position:relative;min-width:0;background:#f4ecdf;border:1px solid #cbb99e;padding:9px;box-shadow:0 8px 28px rgba(80,58,36,.08)}
-.map-inner{position:relative;overflow:hidden;background:#f2e9da;line-height:0}
+.map-inner{position:relative;overflow:hidden;background:#f2e9da;line-height:0;touch-action:pan-y}.map-canvas{position:relative;width:100%;transform-origin:50% 50%;will-change:transform;transition:transform .18s ease}.map-inner.is-panning .map-canvas{transition:none}.map-zoom{position:absolute;right:12px;bottom:12px;z-index:12;display:flex;flex-direction:column;gap:5px}.map-zoom button{min-width:34px;height:34px;border:1px solid #ad9677;background:#f8f1e6ed;color:#684f37;border-radius:3px;font:18px Georgia,serif;box-shadow:0 2px 7px #49351d22;cursor:pointer}.map-zoom #zoomReset{font:10px Arial,sans-serif;padding:0 6px}
 .map-inner>img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;image-rendering:auto}
 .route-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.65}
 .route-layer path{fill:none;stroke:#a76550;stroke-width:2.2;stroke-dasharray:5 7;stroke-linecap:round}
@@ -30,11 +30,11 @@ h1{font-weight:400;font-size:clamp(26px,4vw,43px);letter-spacing:.07em;margin:3p
 .add-place-btn{position:absolute;right:16px;top:15px;z-index:8;border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 13px;font-size:11px;cursor:pointer;box-shadow:0 3px 10px #49351d22}.map-inner.picking{cursor:crosshair;outline:2px dashed #a76550;outline-offset:-5px}.custom-marker .marker-badge{background:#e6eadb;border-color:#78836c}.custom-marker .marker-label{border-color:#aab49a;color:#5f7054}.place-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.place-actions .btn{font-size:10px;padding:8px 10px}.add-help{display:none;position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;background:#715940;color:#fff8ed;padding:9px 13px;font:11px Arial,sans-serif;white-space:nowrap}.map-inner.picking .add-help{display:block}.map-stamp{position:absolute;right:18px;bottom:18px;width:66px;height:66px;border:1px solid #a88e6e;border-radius:50%;display:grid;place-items:center;color:#9a7b58;background:#f5ecdecc;transform:rotate(-12deg);font-size:10px;text-align:center;line-height:1.35}
 .marker{position:absolute;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;z-index:3;color:var(--ink);transition:transform .18s}
 .marker:hover,.marker:focus-visible{transform:translate(-50%,-56%) scale(1.08);outline:none;z-index:5}
-.marker-badge{width:34px;height:34px;border-radius:50% 50% 50% 9px;transform:rotate(-45deg);display:grid;place-items:center;background:#f8f0e3;border:1.5px solid #927253;box-shadow:0 4px 9px #503a282c}
-.marker-badge span{transform:rotate(45deg);font-size:16px;line-height:1}
-.marker-label{display:block;margin-top:4px;padding:3px 6px;background:#f8f1e6eF;border:1px solid #d4c2a7;border-radius:2px;font:10px/1.2 Arial,"Songti SC",sans-serif;white-space:nowrap;box-shadow:0 2px 6px #49351d18}
+.marker-badge{width:25px;height:25px;border-radius:50% 50% 50% 9px;transform:rotate(-45deg);display:grid;place-items:center;background:#f8f0e3;border:1.5px solid #927253;box-shadow:0 4px 9px #503a282c}
+.marker-badge span{transform:rotate(45deg);font-size:12px;line-height:1}
+.marker-label{display:none;margin-top:3px;padding:3px 6px;background:#f8f1e6eF;border:1px solid #d4c2a7;border-radius:2px;font:10px/1.2 Arial,"Songti SC",sans-serif;white-space:nowrap;box-shadow:0 2px 6px #49351d18}
 .marker.active .marker-badge{background:#ead9c1;border-color:var(--red);box-shadow:0 0 0 4px #a85f4b22}
-.marker.active .marker-label{color:var(--red);border-color:#b98470}
+.marker.active .marker-label{display:block;color:var(--red);border-color:#b98470}
 .side{display:flex;flex-direction:column;gap:14px}
 .side-card{background:var(--paper2);border:1px solid #d7c5aa;padding:16px 15px;box-shadow:0 5px 18px #614b3210}
 .side-title{font-size:15px;font-weight:400;margin:0 0 10px;letter-spacing:.08em}
@@ -80,7 +80,7 @@ h1{font-weight:400;font-size:clamp(26px,4vw,43px);letter-spacing:.07em;margin:3p
 .saved-hint{font-size:10px;color:#9a8468}
 .decor-tape{position:absolute;top:-8px;left:48%;width:72px;height:18px;background:#d5bd91aa;transform:rotate(-4deg);z-index:1}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.top-note{display:none}}
-@media(max-width:600px){.side{grid-template-columns:1fr}.album-body{grid-template-columns:1fr}.album h2{font-size:23px}.editor{grid-template-columns:1fr}.editor .wide{grid-column:auto}.marker-badge{width:27px;height:27px}.marker-badge span{font-size:13px}.marker-label{display:none}.marker.active .marker-label{display:block;font-size:10px;padding:4px 7px;position:absolute;left:50%;top:100%;transform:translateX(-50%);z-index:10}.map-caption{font-size:7px}.add-place-btn{position:absolute;right:16px;top:15px;z-index:8;border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 13px;font-size:11px;cursor:pointer;box-shadow:0 3px 10px #49351d22}.map-inner.picking{cursor:crosshair;outline:2px dashed #a76550;outline-offset:-5px}.custom-marker .marker-badge{background:#e6eadb;border-color:#78836c}.custom-marker .marker-label{border-color:#aab49a;color:#5f7054}.place-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.place-actions .btn{font-size:10px;padding:8px 10px}.add-help{display:none;position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;background:#715940;color:#fff8ed;padding:9px 13px;font:11px Arial,sans-serif;white-space:nowrap}.map-inner.picking .add-help{display:block}.map-stamp{width:48px;height:48px;font-size:8px}}
+@media(max-width:600px){.side{grid-template-columns:1fr}.album-body{grid-template-columns:1fr}.album h2{font-size:23px}.editor{grid-template-columns:1fr}.editor .wide{grid-column:auto}.marker-badge{width:21px;height:21px}.marker-badge span{font-size:10px}.marker-label{display:none}.marker.active .marker-label{display:block;font-size:10px;padding:4px 7px;position:absolute;left:50%;top:100%;transform:translateX(-50%);z-index:10}.map-caption{font-size:7px}.add-place-btn{position:absolute;right:16px;top:15px;z-index:8;border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 13px;font-size:11px;cursor:pointer;box-shadow:0 3px 10px #49351d22}.map-inner.picking{cursor:crosshair;outline:2px dashed #a76550;outline-offset:-5px}.custom-marker .marker-badge{background:#e6eadb;border-color:#78836c}.custom-marker .marker-label{border-color:#aab49a;color:#5f7054}.place-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.place-actions .btn{font-size:10px;padding:8px 10px}.add-help{display:none;position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;background:#715940;color:#fff8ed;padding:9px 13px;font:11px Arial,sans-serif;white-space:nowrap}.map-inner.picking .add-help{display:block}.map-stamp{width:48px;height:48px;font-size:8px}}
 </style>
 </head>
 <body>
@@ -90,7 +90,7 @@ h1{font-weight:400;font-size:clamp(26px,4vw,43px);letter-spacing:.07em;margin:3p
 </header>
 <main class="layout">
  <section class="map-shell" aria-label="香港互动地图">
-  <div class="map-inner" id="mapInner">
+  <div class="map-inner" id="mapInner"><div class="map-canvas" id="mapCanvas">
    <img src="hong_kong_map.webp" alt="香港城市与离岛地图" decoding="async" fetchpriority="high">
    <svg class="route-layer" viewBox="0 0 1344 1152" preserveAspectRatio="none" aria-hidden="true">
     <path d="M480 710 C540 650 670 600 780 615 S805 680 820 700 S790 580 770 560"/>
@@ -99,7 +99,7 @@ h1{font-weight:400;font-size:clamp(26px,4vw,43px);letter-spacing:.07em;margin:3p
    </svg>
    <button class="add-place-btn" id="addPlaceBtn">＋ 添加地点</button><div class="add-help">点击地图上你想添加的位置 · 点击空白处取消</div><div class="map-caption">MY HONG KONG JOURNAL · MAP NO. 01</div>
    <div class="map-stamp">WANDER<br>AND<br>WONDER</div>
-  </div>
+  </div><div class="map-zoom" aria-label="地图缩放"><button type="button" id="zoomIn" aria-label="放大地图">＋</button><button type="button" id="zoomOut" aria-label="缩小地图">−</button><button type="button" id="zoomReset" aria-label="恢复默认大小">复位</button></div></div>
  </section>
  <aside class="side">
   <section class="side-card"><h2 class="side-title">旅行索引 · INDEX</h2><p>点击地图上的地点图章，打开相册；在相册下方可添加照片、文字和声音。新增地点可填写详细地址。</p><ul class="place-list" id="placeList"></ul></section>
@@ -141,7 +141,7 @@ const places = [
  {id:"silvermine",name:"银矿湾",en:"SILVERMINE BAY",icon:"🌊",x:39.8,y:67.8,desc:"梅窝海湾边的一段悠闲时光。"}
 ];
 const $=s=>document.querySelector(s), dbName="hkTravelJournalDB", storeName="albums";
-let current=null, db, pendingPoint=null, picking=false, customPlaces=[];
+let current=null, db, pendingPoint=null, picking=false, customPlaces=[], mapZoom=1, mapPanX=0, mapPanY=0, dragStart=null, didDrag=false;
 function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(dbName,3);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(storeName))req.result.createObjectStore(storeName,{keyPath:"id"});if(!req.result.objectStoreNames.contains("customPlaces"))req.result.createObjectStore("customPlaces",{keyPath:"id"});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
 function getRecord(id){return new Promise((resolve,reject)=>{const r=db.transaction(storeName).objectStore(storeName).get(id);r.onsuccess=()=>resolve(r.result||{id,caption:"",note:"",photos:[],audios:[]});r.onerror=()=>reject(r.error)})}
 function putRecord(record){return new Promise((resolve,reject)=>{const tx=db.transaction(storeName,"readwrite");tx.objectStore(storeName).put(record);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
@@ -152,9 +152,13 @@ function renderOnePlace(p,isCustom=false){const map=$("#mapInner"),list=$("#plac
 function renderCustomPlaces(){customPlaces.forEach(p=>renderOnePlace(p,true))}
 function setPicking(on){picking=on;$("#mapInner").classList.toggle("picking",on);$("#addPlaceBtn").textContent=on?"取消添加":"＋ 添加地点"}
 $("#addPlaceBtn").addEventListener("click",()=>setPicking(!picking));
-$("#mapInner").addEventListener("click",e=>{if(!picking||e.target.closest("button"))return;const r=e.currentTarget.getBoundingClientRect();pendingPoint={x:Math.max(1,Math.min(99,(e.clientX-r.left)/r.width*100)),y:Math.max(1,Math.min(99,(e.clientY-r.top)/r.height*100))};setPicking(false);$("#newPlaceName").value="";$("#newPlaceAddress").value="";$("#newPlaceDesc").value="";$("#addModal").classList.add("open")});
+$("#mapInner").addEventListener("click",e=>{if(!picking||e.target.closest("button"))return;const r=$("#mapCanvas").getBoundingClientRect();pendingPoint={x:Math.max(1,Math.min(99,(e.clientX-r.left)/r.width*100)),y:Math.max(1,Math.min(99,(e.clientY-r.top)/r.height*100))};setPicking(false);$("#newPlaceName").value="";$("#newPlaceAddress").value="";$("#newPlaceDesc").value="";$("#addModal").classList.add("open")});
 $("#addClose").addEventListener("click",()=>$("#addModal").classList.remove("open"));$("#addModal").addEventListener("click",e=>{if(e.target===$("#addModal"))$("#addModal").classList.remove("open")});
 $("#confirmAdd").addEventListener("click",async()=>{const name=$("#newPlaceName").value.trim();if(!name){$("#addHint").textContent="请先填写地点名称。";return}const p={id:"custom-"+Date.now(),name,en:$("#newPlaceCategory").value.toUpperCase(),address:$("#newPlaceAddress").value.trim(),icon:$("#newPlaceIcon").value,desc:$("#newPlaceDesc").value.trim()||"自己的新发现。",x:pendingPoint.x,y:pendingPoint.y,custom:true};try{await saveCustomPlace(p);customPlaces.push(p);renderOnePlace(p,true);$("#addModal").classList.remove("open");$("#addHint").textContent="地点已保存。"}catch(err){$("#addHint").textContent="保存失败，请稍后重试。"}});
+function applyMapTransform(){const canvas=$("#mapCanvas");canvas.style.transform="translate("+mapPanX+"px,"+mapPanY+"px) scale("+mapZoom+")";$("#zoomOut").disabled=mapZoom<=1;$("#zoomIn").disabled=mapZoom>=3;$("#zoomReset").textContent=mapZoom===1?"复位":Math.round(mapZoom*100)+"%";}
+function setMapZoom(next){mapZoom=Math.max(1,Math.min(3,next));if(mapZoom===1){mapPanX=0;mapPanY=0;}applyMapTransform();}
+$("#zoomIn").addEventListener("click",()=>setMapZoom(mapZoom+.25));$("#zoomOut").addEventListener("click",()=>setMapZoom(mapZoom-.25));$("#zoomReset").addEventListener("click",()=>setMapZoom(1));
+const mapCanvas=$("#mapCanvas");mapCanvas.addEventListener("pointerdown",e=>{if(mapZoom<=1||e.target.closest("button"))return;dragStart={x:e.clientX,y:e.clientY,px:mapPanX,py:mapPanY};didDrag=false;mapCanvas.setPointerCapture(e.pointerId);});mapCanvas.addEventListener("pointermove",e=>{if(!dragStart)return;const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;if(Math.abs(dx)+Math.abs(dy)>5)didDrag=true;if(didDrag){mapPanX=dragStart.px+dx;mapPanY=dragStart.py+dy;$("#mapInner").classList.add("is-panning");applyMapTransform();}});function stopMapDrag(){dragStart=null;$("#mapInner").classList.remove("is-panning");}mapCanvas.addEventListener("pointerup",stopMapDrag);mapCanvas.addEventListener("pointercancel",stopMapDrag);mapCanvas.addEventListener("click",e=>{if(didDrag){e.stopPropagation();didDrag=false;}},true);applyMapTransform();
 function renderMarkers(){
  const map=$("#mapInner"), list=$("#placeList");
  places.forEach(p=>{
