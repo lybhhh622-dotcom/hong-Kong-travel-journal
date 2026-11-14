@@ -1,34 +1,190 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eee4d2"><title>香港漫游手记</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eee4d2">
+<title>香港漫游手记 · Hong Kong Travel Journal</title>
 <style>
-:root{--paper:#f1e8d8;--ink:#624b38;--muted:#9b8064;--line:#cbb79a}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Songti SC",serif}.top{padding:22px 4%;border-bottom:1px solid #d8c8b1;background:#f8f2e7c9;display:flex;justify-content:space-between;align-items:end}.k{font:10px Arial;letter-spacing:.25em;color:var(--muted)}h1{font-size:clamp(26px,4vw,42px);font-weight:400;margin:5px 0}.sub{font:11px Arial;letter-spacing:.18em;color:var(--muted)}.top p{text-align:right;color:var(--muted);font-size:12px;line-height:1.7}.layout{max-width:1600px;margin:auto;padding:22px 2.5%;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:20px}.mapbox,.card{background:#faf5eb;border:1px solid var(--line);padding:10px;box-shadow:0 6px 24px #503a2810}.maptitle{font:9px Arial;letter-spacing:.2em;color:#8e7258;padding:5px 5px 12px}#map{height:76vh;min-height:460px;border:1px solid #d7c5aa}.side{display:flex;flex-direction:column;gap:14px}.card{padding:16px}.card h2{font-size:15px;font-weight:400;margin:0 0 10px}.card p{font-size:12px;line-height:1.8;color:#88745e}.list{list-style:none;padding:0}.list button{width:100%;display:flex;gap:9px;padding:8px 2px;border:0;border-bottom:1px dashed #ddcdb7;background:none;text-align:left;color:#6e5842;font-size:12px}.mini{width:23px;height:23px;border:1px solid #c9b394;border-radius:50%;display:grid;place-items:center;background:#f4ead9}.pin{width:34px;height:34px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);display:grid;place-items:center;background:#f8f0e3;border:1.5px solid #927253;box-shadow:0 4px 9px #503a282c}.pin span{transform:rotate(45deg);font-size:17px}.foot{padding:0 3% 24px;display:flex;justify-content:space-between;color:#a38b6e;font:9px Arial;letter-spacing:.16em}
-.modal{display:none;position:fixed;inset:0;background:#34291f88;z-index:1000;align-items:center;justify-content:center;padding:14px}.modal.open{display:flex}.album{position:relative;width:min(900px,100%);max-height:94vh;overflow:auto;background:#f5eddf;border:1px solid #c8b393;padding:26px;box-shadow:0 18px 55px #4834202e}.close{position:absolute;right:15px;top:12px;border:1px solid #cbb99f;background:#f8f2e8;color:#71583e;border-radius:50%;width:34px;height:34px;font-size:19px}.album h2{font-weight:400}.body{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.photo{background:#fffaf1;padding:8px 8px 22px;border:1px solid #d7c7ae}.photo img{width:100%;aspect-ratio:4/3;object-fit:cover}.empty{grid-column:1/-1;padding:35px;border:1px dashed #cbb99f;text-align:center;color:#a28b6e;font-size:12px}.note{background:#efe3ce;border-left:3px solid #b37b60;padding:14px;margin-bottom:12px}.note p{white-space:pre-wrap;font-size:12px;line-height:1.8}.note audio{width:100%}.editor{border-top:1px dashed #d0bea2;margin-top:20px;padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.editor label{font-size:11px;color:#8d7559;display:block;margin-bottom:5px}.editor input,.editor textarea{width:100%;border:1px solid #d2c0a4;background:#fbf7ef;padding:9px}.wide{grid-column:1/-1}.save{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}.btn{border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 15px;font-size:11px}.hint{font-size:10px;color:#9a8468}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}#map{height:65vh;min-height:430px}.top p{display:none}}@media(max-width:600px){.side{grid-template-columns:1fr}.body{grid-template-columns:1fr}.editor{grid-template-columns:1fr}.wide{grid-column:auto}#map{height:65vh;min-height:420px}}
-</style></head><body>
-<header class="top"><div><div class="k">PERSONAL TRAVEL ARCHIVE · EST. 2026</div><h1>香港漫游手记</h1><div class="sub">HONG KONG · CITY & ISLANDS</div></div><p>一张地图，收藏沿途的风景<br>PHOTOGRAPHS · NOTES · VOICE MEMOS</p></header>
-<main class="layout"><section class="mapbox"><div class="maptitle">MY HONG KONG JOURNAL · MAP NO. 01</div><div id="map"></div></section><aside class="side"><section class="card"><h2>旅行索引 · INDEX</h2><p>选择地图标记，打开对应旅行相册。每一处都可以放入自己的照片、文字和声音。</p><ul class="list" id="list"></ul></section><section class="card"><h2>手记说明 · NOTES</h2><p>地图使用真实地理底图。相册内容保存在当前浏览器设备中，可随时编辑。</p><small>✦ 8 PLACES TO REMEMBER<br>✦ PHOTO / TEXT / AUDIO</small></section></aside></main><footer class="foot"><span>HONG KONG TRAVEL JOURNAL</span><span>KEEP YOUR LITTLE MOMENTS</span></footer>
-<div class="modal" id="modal"><section class="album"><button class="close" id="close">×</button><div style="font:9px Arial;letter-spacing:.2em;color:#a0805d">A PLACE TO REMEMBER · TRAVEL FILE</div><h2 id="title"></h2><p id="desc" style="font-size:12px;color:#91795f"></p><div class="body"><div class="gallery" id="gallery"></div><div><div class="note"><b>✎ 随手记 / LITTLE NOTES</b><p id="story">还没有写下这次的故事。</p></div><div class="note"><b>♫ 声音明信片 / VOICE POSTCARD</b><div id="audios"></div></div></div></div><div class="editor"><div><label>相册标题</label><input id="caption"></div><div><label>添加照片</label><input id="photos" type="file" accept="image/*" multiple></div><div class="wide"><label>写下想说的话</label><textarea id="text" rows="3"></textarea></div><div class="wide"><label>添加声音</label><input id="sounds" type="file" accept="audio/*" multiple></div></div><div class="save"><span class="hint" id="hint">内容只保存在当前浏览器设备中。</span><div><button class="btn" id="clear">清空本地点内容</button> <button class="btn" id="save">保存这页手记</button></div></div></section></div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
-const places=[
-{id:'harbour-city',name:'海港城',en:'HARBOUR CITY',icon:'🏬',lat:22.2969,lng:114.1687,desc:'维多利亚港边的购物与海景。'},
-{id:'tsim-sha-tsui',name:'尖沙咀',en:'TSIM SHA TSUI',icon:'⛴',lat:22.2970,lng:114.1722,desc:'沿着海旁散步，看看城市与港湾。'},
-{id:'central',name:'中环',en:'CENTRAL',icon:'🏙',lat:22.2819,lng:114.1580,desc:'街巷、天际线与城市日常。'},
-{id:'peak',name:'太平山顶',en:'THE PEAK',icon:'🚋',lat:22.2759,lng:114.1455,desc:'登高望远，把香港收进视野。'},
-{id:'yaumatei',name:'油麻地',en:'YAU MA TEI',icon:'🏮',lat:22.3148,lng:114.1708,desc:'老街、霓虹与生活气息。'},
-{id:'museum',name:'香港故宫文化博物馆',en:'HONG KONG PALACE MUSEUM',icon:'🏛',lat:22.3035,lng:114.0342,desc:'在西九文化区遇见艺术与历史。'},
-{id:'disney',name:'香港迪士尼乐园',en:'HONG KONG DISNEYLAND',icon:'🏰',lat:22.3130,lng:114.0413,desc:'把童话与快乐留在大屿山。'},
-{id:'silvermine',name:'银矿湾',en:'SILVERMINE BAY',icon:'🌊',lat:22.2650,lng:113.9975,desc:'梅窝海湾边的一段悠闲时光。'}];
-const map=L.map('map',{scrollWheelZoom:false}).setView([22.30,114.13],11);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
-let db,current;const markers={};
-function dbopen(){return new Promise((ok,no)=>{let q=indexedDB.open('hkTravelJournalDB',1);q.onupgradeneeded=()=>q.result.createObjectStore('albums',{keyPath:'id'});q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}
-function get(id){return new Promise((ok,no)=>{let q=db.transaction('albums').objectStore('albums').get(id);q.onsuccess=()=>ok(q.result||{id,caption:'',note:'',photos:[],audios:[]});q.onerror=()=>no(q.error)})}
-function put(r){return new Promise((ok,no)=>{let t=db.transaction('albums','readwrite');t.objectStore('albums').put(r);t.oncomplete=ok;t.onerror=()=>no(t.error)})}
-function del(id){return new Promise((ok,no)=>{let t=db.transaction('albums','readwrite');t.objectStore('albums').delete(id);t.oncomplete=ok;t.onerror=()=>no(t.error)})}
-function read(fs){return Promise.all([...fs].map(f=>new Promise((ok,no)=>{let r=new FileReader();r.onload=()=>ok({name:f.name,data:r.result});r.onerror=no;r.readAsDataURL(f)})))}
-function open(p){current=p;get(p.id).then(r=>{document.getElementById('title').textContent=r.caption||p.name;document.getElementById('desc').textContent=p.en+' · '+p.desc;document.getElementById('caption').value=r.caption||'';document.getElementById('text').value=r.note||'';document.getElementById('story').textContent=r.note||'还没有写下这次的故事。';document.getElementById('photos').value='';document.getElementById('sounds').value='';let g=document.getElementById('gallery');g.innerHTML='';if(!r.photos.length)g.innerHTML='<div class="empty">这里还没有照片<br>添加照片，把这段旅程收进相册。</div>';r.photos.forEach(x=>{let d=document.createElement('div');d.className='photo';let im=document.createElement('img');im.src=x.data;let s=document.createElement('small');s.textContent=x.name;d.append(im,s);g.append(d)});let a=document.getElementById('audios');a.innerHTML='';if(!r.audios.length)a.textContent='还没有声音记录。';r.audios.forEach(x=>{let d=document.createElement('div');d.textContent=x.name;let au=document.createElement('audio');au.controls=true;au.src=x.data;d.append(au);a.append(d)});document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'})}
-places.forEach(p=>{let ic=L.divIcon({className:'',html:'<div class="pin"><span>'+p.icon+'</span></div>',iconSize:[34,34],iconAnchor:[17,30]});let m=L.marker([p.lat,p.lng],{icon:ic}).addTo(map).bindTooltip(p.name);m.on('click',()=>open(p));markers[p.id]=m;let li=document.createElement('li'),b=document.createElement('button');b.innerHTML='<span class="mini">'+p.icon+'</span>'+p.name;b.onclick=()=>{map.flyTo([p.lat,p.lng],14);open(p)};li.append(b);document.getElementById('list').append(li)});
-document.getElementById('save').onclick=async()=>{if(!current)return;let h=document.getElementById('hint');h.textContent='正在保存……';try{let r=await get(current.id);r.caption=document.getElementById('caption').value.trim();r.note=document.getElementById('text').value;r.photos.push(...await read(document.getElementById('photos').files));r.audios.push(...await read(document.getElementById('sounds').files));await put(r);h.textContent='已保存 · 内容保存在这台设备的浏览器中。';document.getElementById('story').textContent=r.note||'还没有写下这次的故事。'}catch(e){h.textContent='保存失败，可能是浏览器存储空间不足。'}};
-document.getElementById('clear').onclick=async()=>{if(current&&confirm('确定清空这个地点的照片、文字和声音吗？')){await del(current.id);document.getElementById('hint').textContent='本地点内容已清空。';document.getElementById('modal').classList.remove('open')}};
-function close(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}document.getElementById('close').onclick=close;document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')close()};document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-(async()=>{try{db=await dbopen()}catch(e){alert('浏览器未能启用本地存储，请使用较新的 Safari、Chrome 或 Edge。')}})();
-</script></body></html>
+:root{
+ --paper:#f1e8d8; --paper2:#f8f2e7; --ink:#624b38; --muted:#9b8064;
+ --line:#cbb79a; --red:#a85f4b; --sage:#78836c; --gold:#b38b54;
+ --shadow:0 18px 55px rgba(72,52,32,.18);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Songti SC","Noto Serif SC",serif}
+button,input,textarea{font:inherit}
+.topbar{padding:22px clamp(18px,4vw,56px) 15px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:1px solid #d8c8b1;background:rgba(248,242,231,.78)}
+.brand-kicker{font:10px/1.4 Arial,sans-serif;letter-spacing:.25em;color:var(--muted);text-transform:uppercase}
+h1{font-weight:400;font-size:clamp(26px,4vw,43px);letter-spacing:.07em;margin:3px 0 0}
+.subtitle{font:11px Arial,sans-serif;letter-spacing:.18em;color:var(--muted);margin-top:6px}
+.top-note{font-size:12px;color:var(--muted);text-align:right;line-height:1.7}
+.layout{max-width:1600px;margin:auto;padding:22px clamp(12px,2.5vw,36px) 35px;display:grid;grid-template-columns:minmax(0,1fr) 235px;gap:22px}
+.map-shell{position:relative;min-width:0;background:#f4ecdf;border:1px solid #cbb99e;padding:9px;box-shadow:0 8px 28px rgba(80,58,36,.08)}
+.map-inner{position:relative;overflow:hidden;background:#f2e9da;line-height:0}
+.map-inner>img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;image-rendering:auto}
+.route-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.65}
+.route-layer path{fill:none;stroke:#a76550;stroke-width:2.2;stroke-dasharray:5 7;stroke-linecap:round}
+.route-layer circle{fill:#a76550;stroke:#f7efe3;stroke-width:2}
+.map-caption{position:absolute;left:18px;top:16px;font:9px Arial,sans-serif;letter-spacing:.2em;color:#8e7258;background:#f4ecdfd9;padding:6px 8px}
+.add-place-btn{position:absolute;right:16px;top:15px;z-index:8;border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 13px;font-size:11px;cursor:pointer;box-shadow:0 3px 10px #49351d22}.map-inner.picking{cursor:crosshair;outline:2px dashed #a76550;outline-offset:-5px}.custom-marker .marker-badge{background:#e6eadb;border-color:#78836c}.custom-marker .marker-label{border-color:#aab49a;color:#5f7054}.place-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.place-actions .btn{font-size:10px;padding:8px 10px}.add-help{display:none;position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;background:#715940;color:#fff8ed;padding:9px 13px;font:11px Arial,sans-serif;white-space:nowrap}.map-inner.picking .add-help{display:block}.map-stamp{position:absolute;right:18px;bottom:18px;width:66px;height:66px;border:1px solid #a88e6e;border-radius:50%;display:grid;place-items:center;color:#9a7b58;background:#f5ecdecc;transform:rotate(-12deg);font-size:10px;text-align:center;line-height:1.35}
+.marker{position:absolute;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;z-index:3;color:var(--ink);transition:transform .18s}
+.marker:hover,.marker:focus-visible{transform:translate(-50%,-56%) scale(1.08);outline:none;z-index:5}
+.marker-badge{width:43px;height:43px;border-radius:50% 50% 50% 9px;transform:rotate(-45deg);display:grid;place-items:center;background:#f8f0e3;border:1.5px solid #927253;box-shadow:0 4px 9px #503a282c}
+.marker-badge span{transform:rotate(45deg);font-size:19px;line-height:1}
+.marker-label{display:block;margin-top:5px;padding:3px 7px;background:#f8f1e6eF;border:1px solid #d4c2a7;border-radius:2px;font:10px/1.2 Arial,"Songti SC",sans-serif;white-space:nowrap;box-shadow:0 2px 6px #49351d18}
+.marker.active .marker-badge{background:#ead9c1;border-color:var(--red);box-shadow:0 0 0 4px #a85f4b22}
+.marker.active .marker-label{color:var(--red);border-color:#b98470}
+.side{display:flex;flex-direction:column;gap:14px}
+.side-card{background:var(--paper2);border:1px solid #d7c5aa;padding:16px 15px;box-shadow:0 5px 18px #614b3210}
+.side-title{font-size:15px;font-weight:400;margin:0 0 10px;letter-spacing:.08em}
+.side-card p{font-size:12px;line-height:1.8;color:#88745e;margin:0}
+.place-list{list-style:none;padding:0;margin:8px 0 0}
+.place-list button{width:100%;display:flex;align-items:center;gap:9px;padding:8px 2px;border:0;border-bottom:1px dashed #ddcdb7;background:none;text-align:left;color:#6e5842;cursor:pointer;font-size:12px}
+.place-list button:hover{color:var(--red)}
+.place-list .mini{width:23px;height:23px;border:1px solid #c9b394;border-radius:50%;display:grid;place-items:center;background:#f4ead9;font-size:12px}
+.legend{font:10px Arial,sans-serif;letter-spacing:.1em;color:#9a8063;margin-top:12px}
+.footer{max-width:1600px;margin:0 auto;padding:0 clamp(15px,3vw,40px) 24px;display:flex;justify-content:space-between;color:#a38b6e;font:9px Arial,sans-serif;letter-spacing:.16em}
+.modal{position:fixed;inset:0;background:#34291f88;display:none;align-items:center;justify-content:center;padding:18px;z-index:20;backdrop-filter:blur(3px)}
+.modal.open{display:flex}
+.album{position:relative;width:min(920px,100%);max-height:92vh;overflow:auto;background:#f5eddf;border:1px solid #c8b393;box-shadow:var(--shadow);padding:clamp(18px,3vw,34px)}
+.album:before{content:"";position:absolute;inset:7px;border:1px solid #dfd0b9;pointer-events:none}
+.close{position:absolute;right:20px;top:17px;border:1px solid #cbb99f;background:#f8f2e8;color:#71583e;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:19px;z-index:2}
+.album-head{position:relative;display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid #d8c6aa;padding:0 45px 16px 0}
+.album-icon{width:48px;height:48px;border:1px solid #b99c76;border-radius:50%;display:grid;place-items:center;background:#eee1cd;font-size:23px;flex-shrink:0}
+.eyebrow{font:9px Arial,sans-serif;letter-spacing:.22em;color:#a0805d}
+.album h2{font-weight:400;font-size:27px;margin:3px 0 4px}
+.album-desc{font-size:12px;color:#91795f;margin:0}
+.album-body{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:22px;padding-top:20px}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
+.photo-frame{background:#fffaf1;padding:8px 8px 25px;border:1px solid #d7c7ae;box-shadow:0 4px 12px #60452a17;transform:rotate(-1deg)}
+.photo-frame:nth-child(2n){transform:rotate(1.4deg)}
+.photo-frame img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#e7dcc9}
+.photo-frame small{display:block;text-align:center;color:#9a8063;font-size:10px;padding-top:7px}
+.empty-photo{grid-column:1/-1;border:1px dashed #cbb99f;padding:35px 15px;text-align:center;color:#a28b6e;font-size:12px;line-height:2}
+.notes{display:flex;flex-direction:column;gap:13px}
+.paper-note{background:#efe3ce;border-left:3px solid #b37b60;padding:14px 15px;min-height:105px;box-shadow:0 3px 9px #5c432315}
+.paper-note h3{font-weight:400;font-size:14px;margin:0 0 7px}
+.paper-note p{font-size:12px;line-height:1.9;color:#76614a;white-space:pre-wrap;margin:0}
+.audio-list audio{width:100%;height:32px;margin-top:7px}
+.editor{border-top:1px dashed #d0bea2;margin-top:22px;padding-top:17px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.editor label{font-size:11px;color:#8d7559;display:block;margin-bottom:5px}
+.editor input[type=text],.editor textarea{width:100%;border:1px solid #d2c0a4;background:#fbf7ef;padding:9px;color:#604c38;outline-color:#b58d66}
+.editor textarea{min-height:72px;resize:vertical}
+.editor .wide{grid-column:1/-1}
+.file-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.file-row input{font-size:11px;max-width:100%}
+.save-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 15px;cursor:pointer;font-size:11px;letter-spacing:.08em}
+.btn.secondary{background:transparent;color:#715940}
+.saved-hint{font-size:10px;color:#9a8468}
+.decor-tape{position:absolute;top:-8px;left:48%;width:72px;height:18px;background:#d5bd91aa;transform:rotate(-4deg);z-index:1}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.top-note{display:none}}
+@media(max-width:600px){.side{grid-template-columns:1fr}.album-body{grid-template-columns:1fr}.album h2{font-size:23px}.editor{grid-template-columns:1fr}.editor .wide{grid-column:auto}.marker-badge{width:34px;height:34px}.marker-badge span{font-size:16px}.marker-label{font-size:8px;padding:2px 4px}.map-caption{font-size:7px}.add-place-btn{position:absolute;right:16px;top:15px;z-index:8;border:1px solid #94785a;background:#715940;color:#fff8ed;padding:9px 13px;font-size:11px;cursor:pointer;box-shadow:0 3px 10px #49351d22}.map-inner.picking{cursor:crosshair;outline:2px dashed #a76550;outline-offset:-5px}.custom-marker .marker-badge{background:#e6eadb;border-color:#78836c}.custom-marker .marker-label{border-color:#aab49a;color:#5f7054}.place-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.place-actions .btn{font-size:10px;padding:8px 10px}.add-help{display:none;position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:9;background:#715940;color:#fff8ed;padding:9px 13px;font:11px Arial,sans-serif;white-space:nowrap}.map-inner.picking .add-help{display:block}.map-stamp{width:48px;height:48px;font-size:8px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div><div class="brand-kicker">PERSONAL TRAVEL ARCHIVE · EST. 2026</div><h1>香港漫游手记</h1><div class="subtitle">HONG KONG · CITY & ISLANDS</div></div>
+ <div class="top-note">一张地图，收藏沿途的风景<br>PHOTOGRAPHS · NOTES · VOICE MEMOS</div>
+</header>
+<main class="layout">
+ <section class="map-shell" aria-label="香港互动地图">
+  <div class="map-inner" id="mapInner">
+   <img src="assets/hong_kong_map.webp" alt="香港城市与离岛地图" decoding="async" fetchpriority="high">
+   <svg class="route-layer" viewBox="0 0 1344 1152" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M480 710 C540 650 670 600 780 615 S805 680 820 700 S790 580 770 560"/>
+    <path d="M480 710 C505 735 520 760 535 780"/>
+    <circle cx="480" cy="710" r="4"/><circle cx="535" cy="780" r="4"/><circle cx="780" cy="615" r="4"/>
+   </svg>
+   <button class="add-place-btn" id="addPlaceBtn">＋ 添加地点</button><div class="add-help">点击地图上你想添加的位置 · 点击空白处取消</div><div class="map-caption">MY HONG KONG JOURNAL · MAP NO. 01</div>
+   <div class="map-stamp">WANDER<br>AND<br>WONDER</div>
+  </div>
+ </section>
+ <aside class="side">
+  <section class="side-card"><h2 class="side-title">旅行索引 · INDEX</h2><p>选择地图上的标记，打开对应的旅行相册。每一处都可以放入自己的照片、文字和声音。</p><ul class="place-list" id="placeList"></ul></section>
+  <section class="side-card"><h2 class="side-title">手记说明 · NOTES</h2><p>地图采用高清棕色线稿底图，地点图章独立叠加。相册内容可以随时编辑，照片与声音暂时保存在当前浏览器中。</p><div class="legend">✦ 8 ORIGINAL PLACES + YOUR OWN DISCOVERIES<br>✦ PHOTO / TEXT / AUDIO</div></section>
+ </aside>
+</main>
+<footer class="footer"><span>HONG KONG TRAVEL JOURNAL</span><span>KEEP YOUR LITTLE MOMENTS</span></footer>
+
+<div class="modal" id="addModal" role="dialog" aria-modal="true"><section class="album" style="max-width:520px"><button class="close" id="addClose">×</button><div class="eyebrow">ADD A NEW MEMORY · NEW PLACE</div><h2 style="font-weight:400">添加一个新地点</h2><p style="font-size:12px;color:#91795f">地点位置已在地图上选定，你可以补充它的名字和介绍。</p><div class="editor" style="margin-top:14px"><div class="wide"><label for="newPlaceName">地点名称</label><input id="newPlaceName" type="text" placeholder="例如：某家咖啡店"></div><div><label for="newPlaceCategory">地点分类</label><select id="newPlaceCategory" style="width:100%;padding:9px;border:1px solid #d2c0a4;background:#fbf7ef;color:#604c38"><option>其他</option><option>美食</option><option>景点</option><option>购物</option><option>住宿</option><option>自然</option></select></div><div><label for="newPlaceIcon">地点图标</label><select id="newPlaceIcon" style="width:100%;padding:9px;border:1px solid #d2c0a4;background:#fbf7ef;color:#604c38"><option>📍</option><option>☕</option><option>🍜</option><option>🏛️</option><option>🏞️</option><option>🛍️</option><option>🏨</option><option>🌊</option><option>📷</option></select></div><div class="wide"><label for="newPlaceDesc">地点介绍（可选）</label><textarea id="newPlaceDesc" rows="3" placeholder="写下这个地方有什么特别……"></textarea></div></div><div class="save-row"><span class="saved-hint" id="addHint">新增地点保存在当前设备。</span><button class="btn" id="confirmAdd">保存地点</button></div></section></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="albumTitle">
+ <section class="album">
+  <span class="decor-tape"></span><button class="close" id="close" aria-label="关闭">×</button>
+  <div class="album-head"><div class="album-icon" id="albumIcon">✦</div><div><div class="eyebrow">A PLACE TO REMEMBER · TRAVEL FILE</div><h2 id="albumTitle">地点名称</h2><p class="album-desc" id="albumDesc">地点小记</p></div></div>
+  <div class="album-body">
+   <div class="gallery" id="gallery"><div class="empty-photo">这里还没有照片<br>添加照片，把这段旅程收进相册。</div></div>
+   <div class="notes">
+    <div class="paper-note"><h3>✎ 随手记 / LITTLE NOTES</h3><p id="savedText">还没有写下这次的故事。</p></div>
+    <div class="paper-note audio-list"><h3>♫ 声音明信片 / VOICE POSTCARD</h3><div id="audioList"><p style="font-size:11px;color:#9a8063">还没有声音记录。</p></div></div>
+   </div>
+  </div>
+  <div class="editor">
+   <div><label for="caption">相册标题 / CAPTION</label><input id="caption" type="text" placeholder="给这段回忆起个名字"></div>
+   <div><label for="photoFiles">添加照片 / ADD PHOTOS</label><input id="photoFiles" type="file" accept="image/*" multiple></div>
+   <div class="wide"><label for="noteInput">写下想说的话 / YOUR STORY</label><textarea id="noteInput" placeholder="那天的天气、遇见的人、记住的细节……"></textarea></div>
+   <div class="wide"><label for="audioFiles">添加声音 / ADD AUDIO</label><input id="audioFiles" type="file" accept="audio/*" multiple></div>
+  </div>
+  <div class="save-row"><span class="saved-hint" id="savedHint">内容只保存在当前浏览器设备中。</span><div><button class="btn secondary" id="clear">清空本地点内容</button> <button class="btn" id="save">保存这页手记</button></div></div>
+ </section>
+</div>
+<script>
+const places = [
+ {id:"harbour-city",name:"海港城",en:"HARBOUR CITY",icon:"🏬",x:55.0,y:52.7,desc:"维多利亚港边的购物与海景。"},
+ {id:"尖沙咀",name:"尖沙咀",en:"TSIM SHA TSUI",icon:"⛴",x:57.8,y:53.7,desc:"沿着海旁散步，看看城市与港湾。"},
+ {id:"central",name:"中环",en:"CENTRAL",icon:"🏙",x:58.1,y:60.0,desc:"街巷、天际线与城市日常。"},
+ {id:"peak",name:"太平山顶",en:"THE PEAK",icon:"🚋",x:61.0,y:63.0,desc:"登高望远，把香港收进视野。"},
+ {id:"yaumatei",name:"油麻地",en:"YAU MA TEI",icon:"🏮",x:57.7,y:49.3,desc:"老街、霓虹与生活气息。"},
+ {id:"museum",name:"香港故宫文化博物馆",en:"HONG KONG PALACE MUSEUM",icon:"🏛",x:52.8,y:54.2,desc:"在西九文化区遇见艺术与历史。"},
+ {id:"disney",name:"香港迪士尼乐园",en:"HONG KONG DISNEYLAND",icon:"🏰",x:36.0,y:61.5,desc:"把童话与快乐留在大屿山。"},
+ {id:"silvermine",name:"银矿湾",en:"SILVERMINE BAY",icon:"🌊",x:39.8,y:67.8,desc:"梅窝海湾边的一段悠闲时光。"}
+];
+const $=s=>document.querySelector(s), dbName="hkTravelJournalDB", storeName="albums";
+let current=null, db, pendingPoint=null, picking=false, customPlaces=[];
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(dbName,2);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(storeName))req.result.createObjectStore(storeName,{keyPath:"id"});if(!req.result.objectStoreNames.contains("customPlaces"))req.result.createObjectStore("customPlaces",{keyPath:"id"});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+function getRecord(id){return new Promise((resolve,reject)=>{const r=db.transaction(storeName).objectStore(storeName).get(id);r.onsuccess=()=>resolve(r.result||{id,caption:"",note:"",photos:[],audios:[]});r.onerror=()=>reject(r.error)})}
+function putRecord(record){return new Promise((resolve,reject)=>{const tx=db.transaction(storeName,"readwrite");tx.objectStore(storeName).put(record);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function deleteRecord(id){return new Promise((resolve,reject)=>{const tx=db.transaction(storeName,"readwrite");tx.objectStore(storeName).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function getCustomPlaces(){return new Promise((resolve,reject)=>{const q=db.transaction("customPlaces").objectStore("customPlaces").getAll();q.onsuccess=()=>resolve(q.result||[]);q.onerror=()=>reject(q.error)})}
+function saveCustomPlace(p){return new Promise((resolve,reject)=>{const tx=db.transaction("customPlaces","readwrite");tx.objectStore("customPlaces").put(p);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function renderOnePlace(p,isCustom=false){const map=$("#mapInner"),list=$("#placeList");if(map.querySelector(`[data-id="${p.id}"]`))return;const b=document.createElement("button");b.className="marker"+(isCustom?" custom-marker":"");b.style.left=p.x+"%";b.style.top=p.y+"%";b.dataset.id=p.id;b.innerHTML=`<span class="marker-badge"><span>${p.icon}</span></span><span class="marker-label"></span>`;b.querySelector(".marker-label").textContent=p.name;b.title=p.name;b.addEventListener("click",()=>openAlbum(p));map.appendChild(b);const li=document.createElement("li"),lb=document.createElement("button");lb.innerHTML=`<span class="mini"></span><span></span>`;lb.querySelector(".mini").textContent=p.icon;lb.querySelector("span+span").textContent=p.name;lb.addEventListener("click",()=>openAlbum(p));li.appendChild(lb);list.appendChild(li)}
+function renderCustomPlaces(){customPlaces.forEach(p=>renderOnePlace(p,true))}
+function setPicking(on){picking=on;$("#mapInner").classList.toggle("picking",on);$("#addPlaceBtn").textContent=on?"取消添加":"＋ 添加地点"}
+$("#addPlaceBtn").addEventListener("click",()=>setPicking(!picking));
+$("#mapInner").addEventListener("click",e=>{if(!picking||e.target.closest("button"))return;const r=e.currentTarget.getBoundingClientRect();pendingPoint={x:Math.max(1,Math.min(99,(e.clientX-r.left)/r.width*100)),y:Math.max(1,Math.min(99,(e.clientY-r.top)/r.height*100))};setPicking(false);$("#newPlaceName").value="";$("#newPlaceDesc").value="";$("#addModal").classList.add("open")});
+$("#addClose").addEventListener("click",()=>$("#addModal").classList.remove("open"));$("#addModal").addEventListener("click",e=>{if(e.target===$("#addModal"))$("#addModal").classList.remove("open")});
+$("#confirmAdd").addEventListener("click",async()=>{const name=$("#newPlaceName").value.trim();if(!name){$("#addHint").textContent="请先填写地点名称。";return}const p={id:"custom-"+Date.now(),name,en:$("#newPlaceCategory").value.toUpperCase(),icon:$("#newPlaceIcon").value,desc:$("#newPlaceDesc").value.trim()||"自己的新发现。",x:pendingPoint.x,y:pendingPoint.y,custom:true};try{await saveCustomPlace(p);customPlaces.push(p);renderOnePlace(p,true);$("#addModal").classList.remove("open");$("#addHint").textContent="地点已保存。"}catch(err){$("#addHint").textContent="保存失败，请稍后重试。"}});
+function renderMarkers(){
+ const map=$("#mapInner"), list=$("#placeList");
+ places.forEach(p=>{
+  const b=document.createElement("button");b.className="marker";b.style.left=p.x+"%";b.style.top=p.y+"%";b.dataset.id=p.id;b.innerHTML=`<span class="marker-badge"><span>${p.icon}</span></span><span class="marker-label">${p.name}</span>`;b.title=p.name;b.addEventListener("click",()=>openAlbum(p));map.appendChild(b);
+  const li=document.createElement("li"), lb=document.createElement("button");lb.innerHTML=`<span class="mini">${p.icon}</span><span>${p.name}</span>`;lb.addEventListener("click",()=>openAlbum(p));li.appendChild(lb);list.appendChild(li);
+ });
+}
+function renderAlbum(p,r){
+ $("#albumIcon").textContent=p.icon;$("#albumTitle").textContent=r.caption||p.name;$("#albumDesc").textContent=p.en+" · "+p.desc;$("#savedText").textContent=r.note||"还没有写下这次的故事。";
+ $("#caption").value=r.caption||"";$("#noteInput").value=r.note||"";$("#photoFiles").value="";$("#audioFiles").value="";
+ const g=$("#gallery");g.innerHTML="";
+ if(!r.photos.length)g.innerHTML='<div class="empty-photo">这里还没有照片<br>添加照片，把这段旅程收进相册。</div>';
+ r.photos.forEach((ph,i)=>{const f=document.createElement("div");f.className="photo-frame";const im=document.createElement("img");im.src=ph.data;im.alt=ph.name||"旅行照片";const sm=document.createElement("small");sm.textContent=ph.caption||ph.name||`MEMORY ${String(i+1).padStart(2,"0")}`;f.append(im,sm);g.appendChild(f)});
+ const a=$("#audioList");a.innerHTML="";if(!r.audios.length)a.innerHTML='<p style="font-size:11px;color:#9a8063">还没有声音记录。</p>';
+ r.audios.forEach(au=>{const wrap=document.createElement("div");const label=document.createElement("div");label.textContent=au.name||"声音记录";label.style.cssText="font-size:11px;color:#826b51;margin-top:7px";const audio=document.createElement("audio");audio.controls=true;audio.src=au.data;wrap.append(label,audio);a.appendChild(wrap)});
+}
+async function openAlbum(p){current=p;document.querySelectorAll(".marker").forEach(m=>m.classList.toggle("active",m.dataset.id===p.id));const r=await getRecord(p.id);renderAlbum(p,r);$("#modal").classList.add("open");document.body.style.overflow="hidden"}
+function closeAlbum(){$("#modal").classList.remove("open");document.body.style.overflow="";document.querySelectorAll(".marker").forEach(m=>m.classList.remove("active"))}
+function readFiles(files){return Promise.all([...files].map(file=>new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve({name:file.name,data:fr.result});fr.onerror=reject;fr.readAsDataURL(file)})))}
+$("#save").addEventListener("click",async()=>{
+ if(!current)return;const hint=$("#savedHint");hint.textContent="正在保存……";
+ try{const r=await getRecord(current.id);r.caption=$("#caption").value.trim();r.note=$("#noteInput").value;
+  const photos=await readFiles($("#photoFiles").files);photos.forEach(x=>r.photos.push(x));
+  const audios=await readFiles($("#audioFiles").files);audios.forEach(x=>r.audios.push(x));
+  await putRecord(r);renderAlbum(current,r);hint.textContent="已保存 · 内容保存在这台设备的浏览器中。";
+ }catch(e){hint.textContent="保存失败，可能是浏览器存储空间不足。请减少文件后重试。"}
+});
+$("#clear").addEventListener("click",async()=>{if(!current||!confirm("确定清空这个地点的照片、文字和声音吗？"))return;await deleteRecord(current.id);const r=await getRecord(current.id);renderAlbum(current,r);$("#savedHint").textContent="本地点内容已清空。"});
+$("#close").addEventListener("click",closeAlbum);$("#modal").addEventListener("click",e=>{if(e.target===$("#modal"))closeAlbum()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAlbum()});
+(async()=>{try{db=await openDB();renderMarkers();customPlaces=await getCustomPlaces();renderCustomPlaces()}catch(e){alert("浏览器未能启用本地存储，请使用较新的 Safari、Chrome 或 Edge。")}})();
+</script>
+</body>
+</html>
